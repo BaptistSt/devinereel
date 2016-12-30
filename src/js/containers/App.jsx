@@ -33,6 +33,17 @@ class App extends Component {
     this.setState({ year });
   }
 
+  handleAnthonyMode = checked => {
+    if (checked.target.checked) {
+      const video = document.createElement(`video`);
+      video.setAttribute(`src`, `…`);
+      video.className = `anthony-mode`;
+      document.querySelector(`section`).appendChild(video);
+    } else {
+      if (document.querySelector(`.anthony-mode`)) document.querySelector(`.anthony-mode`).remove();
+    }
+  }
+
   render() {
     const { student, course, year } = this.state;
     return (
@@ -54,6 +65,7 @@ class App extends Component {
               currentStudent={student}
               onChangeStudentInput={this.handleStudentInput}
             />
+            <input className='show-that-anthony' type='checkbox' onClick={this.handleAnthonyMode} />
           </div>
           <a className='link-wrapper' target='_blank' rel='noopener'
             href='https://github.com/thibmaek/devineviewer/edit/master/src/js/static/Students.js'>

@@ -90,6 +90,16 @@ nav {
   background-color: color(var(--devine-blue) a(30%));
 }
 
+.show-that-anthony {
+  appearance: button;
+  /*background-color: color(#efefef shade(1.5%));*/
+  background-color: red;
+  width: 20rem;
+  margin-left: 3rem;
+  border: 0;
+  height: 50%;
+}
+
 .no-input {
   margin-top: 20%;
   text-align: center;
