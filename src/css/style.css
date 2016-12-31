@@ -90,6 +90,22 @@ nav {
   background-color: color(var(--devine-blue) a(30%));
 }
 
+.show-that-anthony {
+  appearance: button;
+  background-color: color(#efefef shade(1.5%));
+  width: 20rem;
+  margin-left: 3rem;
+  border: 0;
+  height: 2rem;
+
+  &:focus { outline: none; }
+
+  &:checked {
+    border-radius: 3px;
+    background-color: var(--devine-pink-lighter);
+  }
+}
+
 .no-input {
   margin-top: 20%;
   text-align: center;
