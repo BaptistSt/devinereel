@@ -36,8 +36,14 @@ class App extends Component {
   handleAnthonyMode = checked => {
     if (checked.target.checked) {
       const video = document.createElement(`video`);
-      video.setAttribute(`src`, `…`);
+      video.setAttribute(`src`, `https://student.howest.be/jannes.vandepitte/viewer2/tony.mp4`);
+      video.setAttribute(`autoplay`, ``);
+      video.setAttribute(`loop`, ``);
       video.className = `anthony-mode`;
+      video.style.position = `absolute`;
+      video.style.top = `50%`;
+      video.style.left = `50%`;
+      video.style.transform = `translate(-50%, -50%)`;
       document.querySelector(`section`).appendChild(video);
     } else {
       if (document.querySelector(`.anthony-mode`)) document.querySelector(`.anthony-mode`).remove();
