@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import find from 'lodash.find';
+
 import StudentList from 'src/js/components/StudentList';
 import CourseList from 'src/js/components/CourseList';
 import Display from 'src/js/components/Display';
@@ -14,6 +16,8 @@ class App extends Component {
     student: undefined,
     year: `${new Date().getFullYear()}${new Date().getFullYear() + 1}`,
   };
+
+  generateCoursesFromYear = () => find(Courses, course => `${course.name}` === this.state.year);
 
   handleCourseInput = courseInput => {
     let { course } = this.state;
@@ -57,12 +61,12 @@ class App extends Component {
         <nav>
           <div className='nav-inputs'>
             <select className='year-list' onChange={this.handleYearInput} value={year}>
-              <option value='20142015'>2014-2015</option>
-              <option value='20152016'>2015-2016</option>
-              <option value='20162017'>2016-2017</option>
+              <option value='1415'>2014-2015</option>
+              <option value='1516'>2015-2016</option>
+              <option value='1617'>2016-2017</option>
             </select>
             <CourseList
-              courses={Courses}
+              courses={() => this.generateCoursesFromYear}
               currentCourse={course}
               onChangeCourseInput={this.handleCourseInput}
             />
