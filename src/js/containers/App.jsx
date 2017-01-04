@@ -12,12 +12,17 @@ import Students from 'src/js/static/students';
 class App extends Component {
 
   state = {
-    course: undefined,
-    student: undefined,
-    year: `${new Date().getFullYear()}${new Date().getFullYear() + 1}`,
+    course: ``,
+    courses: [],
+    student: ``,
+    year: `20142015`,
   };
 
-  generateCoursesFromYear = () => find(Courses, course => `${course.name}` === this.state.year);
+  componentDidMount() {
+    let { courses } = this.state;
+    courses = find(Courses, course => `${course.name}` === `1415`).courses;
+    this.setState({ courses });
+  }
 
   handleCourseInput = courseInput => {
     let { course } = this.state;
@@ -32,9 +37,10 @@ class App extends Component {
   }
 
   handleYearInput = yearInput => {
-    let { year } = this.state;
+    let { year, courses } = this.state;
     year = yearInput.target.value;
-    this.setState({ year });
+    courses = find(Courses, course => `${course.name}` === year).courses;
+    this.setState({ year, courses });
   }
 
   handleAnthonyMode = checked => {
@@ -55,7 +61,7 @@ class App extends Component {
   }
 
   render() {
-    const { student, course, year } = this.state;
+    const { student, course, year, courses } = this.state;
     return (
       <div>
         <nav>
@@ -66,7 +72,7 @@ class App extends Component {
               <option value='1617'>2016-2017</option>
             </select>
             <CourseList
-              courses={() => this.generateCoursesFromYear}
+              courses={courses}
               currentCourse={course}
               onChangeCourseInput={this.handleCourseInput}
             />
