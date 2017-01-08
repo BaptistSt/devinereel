@@ -32,4 +32,5 @@ __We will gladly turn over this repo to someone else once we graduate. Long live
 * Resolve modules from absolute paths with Webpack. No arguing about this.
 * Clean up unused deps. Preferably keep using the currently integrated Greenkeeper.
 * No `.env` files. We are not going to include a dependency just to set the PORT env. Prefix commands in the shell, or set cloud instance envs instead. (eg. `PORT=3000 webpack-dev-server`)
-* Use gitmoji (preferably creating a hook with `gitmoji -i`
+* Use gitmoji (preferably creating a hook with `gitmoji -i`.
+* For your [tag release](https://github.com/thibmaek/devinereel/releases) you shall always use the funny/catchy name of a briefing PDF.
