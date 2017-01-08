@@ -1,13 +1,9 @@
 import React, { Component } from 'react';
 
-import find from 'lodash.find';
+import { StudentList, CourseList, Display } from 'src/js/components/';
+import { Students, Courses } from 'src/js/static/';
 
-import StudentList from 'src/js/components/StudentList';
-import CourseList from 'src/js/components/CourseList';
-import Display from 'src/js/components/Display';
-
-import Courses from 'src/js/static/courses';
-import Students from 'src/js/static/students';
+import { flatten } from 'src/js/utils/';
 
 class App extends Component {
 
@@ -15,13 +11,17 @@ class App extends Component {
     course: ``,
     courses: [],
     student: ``,
-    year: `20142015`,
+    year: `20162017`,
   };
 
   componentDidMount() {
     let { courses } = this.state;
-    courses = find(Courses, course => `${course.name}` === `1415`).courses;
-    this.setState({ courses });
+
+    Courses.filter(course => course.name === 20162017)
+      .forEach(course => courses.push(...course.courses));
+    courses = flatten(courses);
+
+    this.setState({ courses, course: courses[0] });
   }
 
   handleCourseInput = courseInput => {
@@ -38,8 +38,13 @@ class App extends Component {
 
   handleYearInput = yearInput => {
     let { year, courses } = this.state;
+    courses = [];
     year = yearInput.target.value;
-    courses = find(Courses, course => `${course.name}` === year).courses;
+
+    Courses.filter(course => course.name === parseInt(year))
+      .forEach(course => courses.push(...course.courses));
+    courses = flatten(courses);
+
     this.setState({ year, courses });
   }
 
@@ -54,7 +59,7 @@ class App extends Component {
       video.style.top = `50%`;
       video.style.left = `50%`;
       video.style.transform = `translate(-50%, -50%)`;
-      document.querySelector(`section`).appendChild(video);
+      document.body.appendChild(video);
     } else {
       if (document.querySelector(`.anthony-mode`)) document.querySelector(`.anthony-mode`).remove();
     }
@@ -67,9 +72,9 @@ class App extends Component {
         <nav>
           <div className='nav-inputs'>
             <select className='year-list' onChange={this.handleYearInput} value={year}>
-              <option value='1415'>2014-2015</option>
-              <option value='1516'>2015-2016</option>
-              <option value='1617'>2016-2017</option>
+              <option value='20162017'>2016-2017</option>
+              <option value='20152016'>2015-2016</option>
+              <option value='20142015'>2014-2015</option>
             </select>
             <CourseList
               courses={courses}
