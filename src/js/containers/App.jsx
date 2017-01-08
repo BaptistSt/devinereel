@@ -1,19 +1,28 @@
 import React, { Component } from 'react';
 
-import StudentList from 'src/js/components/StudentList';
-import CourseList from 'src/js/components/CourseList';
-import Display from 'src/js/components/Display';
+import { StudentList, CourseList, Display } from 'src/js/components/';
+import { Students, Courses } from 'src/js/static/';
 
-import Courses from 'src/js/static/courses';
-import Students from 'src/js/static/students';
+import { flatten } from 'src/js/utils/';
 
 class App extends Component {
 
   state = {
-    course: undefined,
-    student: undefined,
-    year: `${new Date().getFullYear()}${new Date().getFullYear() + 1}`,
+    course: ``,
+    courses: [],
+    student: ``,
+    year: `20162017`,
   };
+
+  componentDidMount() {
+    let { courses } = this.state;
+
+    Courses.filter(course => course.name === 20162017)
+      .forEach(course => courses.push(...course.courses));
+    courses = flatten(courses);
+
+    this.setState({ courses, course: courses[0] });
+  }
 
   handleCourseInput = courseInput => {
     let { course } = this.state;
@@ -28,9 +37,15 @@ class App extends Component {
   }
 
   handleYearInput = yearInput => {
-    let { year } = this.state;
+    let { year, courses } = this.state;
+    courses = [];
     year = yearInput.target.value;
-    this.setState({ year });
+
+    Courses.filter(course => course.name === parseInt(year))
+      .forEach(course => courses.push(...course.courses));
+    courses = flatten(courses);
+
+    this.setState({ year, courses });
   }
 
   handleAnthonyMode = checked => {
@@ -44,25 +59,25 @@ class App extends Component {
       video.style.top = `50%`;
       video.style.left = `50%`;
       video.style.transform = `translate(-50%, -50%)`;
-      document.querySelector(`section`).appendChild(video);
+      document.body.appendChild(video);
     } else {
       if (document.querySelector(`.anthony-mode`)) document.querySelector(`.anthony-mode`).remove();
     }
   }
 
   render() {
-    const { student, course, year } = this.state;
+    const { student, course, year, courses } = this.state;
     return (
       <div>
         <nav>
           <div className='nav-inputs'>
             <select className='year-list' onChange={this.handleYearInput} value={year}>
-              <option value='20142015'>2014-2015</option>
-              <option value='20152016'>2015-2016</option>
               <option value='20162017'>2016-2017</option>
+              <option value='20152016'>2015-2016</option>
+              <option value='20142015'>2014-2015</option>
             </select>
             <CourseList
-              courses={Courses}
+              courses={courses}
               currentCourse={course}
               onChangeCourseInput={this.handleCourseInput}
             />
