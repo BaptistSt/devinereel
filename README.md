@@ -22,7 +22,7 @@ Either click the button (__Opt. A__) in [the application](https://devinereel.her
 
 __We will gladly turn over this repo to someone else once we graduate. Long live OSS ❤️__
 
-### The 8 commandments of maintining Devinereel
+### The 9 commandments of maintining Devinereel
 * Push only to Heroku from the master branch
 * Use feature branches prefixed with your initials and merge them into master (eg. `tm-persistent-state`)
   * Delete these once merged in, no dead branches pls 💀
