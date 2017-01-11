@@ -3,6 +3,7 @@ const DEV1 = [];
 const DEV2 = [
   `lotte.bijlsma`,
   `julie.van.beethoven`,
+  `baptist.standaert`
 ];
 
 const DEV3 = [
